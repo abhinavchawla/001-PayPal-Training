@@ -8,8 +8,7 @@ public class WordLadder
         String inputWord=s.nextLine();
         String dest=s.nextLine();
         Graph g=new Graph();
-        g.perform(inputWord);
-        System.out.println(g.path);
+        g.makeGraph(inputWord);
         if(g.BFS(inputWord,dest))
         	g.printPath(inputWord,dest);
         else
