@@ -51,5 +51,36 @@ class Graph
         return false;
     }
     
+    public String BFS(String startWord, String endWord)
+    {
+    	String currentWord = startWord;
+        Set<String> visited = new HashSet<String>();
+        LinkedList<String> queue = new LinkedList<String>();
+        visited.add(currentWord);
+        HashMap<String, Integer> distance = new HashMap<String, Integer>();
+        queue.add(currentWord);
+        distance.put(currentWord, 0);
+
+        while (queue.size() != 0)
+        {
+            // Dequeue a vertex from queue and print it
+        	currentWord = queue.poll();
+            ArrayList<String> adjacentWords = adjList.get(currentWord);
+            for (String s : adjacentWords) {
+            	if (!visited.contains(s))
+                {
+                    visited.add(currentWord);
+                    queue.add(s);
+                    distance.put(s, distance.get(currentWord)+1) ;
+                }
+            	if(s.equals(endWord)){
+            		return endWord;
+            	}
+            }
+            
+        }
+        return "HI";
+    }
+    
     
 }
