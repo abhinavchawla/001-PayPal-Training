@@ -13,8 +13,7 @@ class Graph
 
     public void perform(String inputWord) throws Exception
     {
-        //ClassLoader classLoader=new Graph().getClass().getClassLoader();
-        //File file=new File(classLoader.getResource("sowpods.txt").getFile());
+
         File file=new File("sowpods.txt");
         BufferedReader rdr=new BufferedReader(new FileReader(file));
         String line="";
@@ -51,4 +50,6 @@ class Graph
             return true;
         return false;
     }
+    
+    
 }
