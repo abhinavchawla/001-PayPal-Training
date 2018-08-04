@@ -12,7 +12,7 @@ class Graph
         path=new HashMap<String,String>();
     }
 
-    public void perform(String inputWord) throws Exception
+    public void makeGraph(String inputWord) throws Exception
     {
         //ClassLoader classLoader=new Graph().getClass().getClassLoader();
         //File file=new File(classLoader.getResource("sowpods.txt").getFile());
@@ -70,7 +70,7 @@ class Graph
             {
                 if (!visited.contains(s))
                 {
-                    visited.add(currentWord);
+                    visited.add(s);
                     queue.add(s);
                     path.put(s,currentWord);
                     //distance.put(s, distance.get(currentWord)+1) ;
