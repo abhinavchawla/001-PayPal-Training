@@ -5,15 +5,17 @@ import java.util.*;
 class Graph
 {
     public HashMap<String,ArrayList<String>> adjList;
-
+    public HashMap<String,String> path;
     Graph()
     {
         adjList=new HashMap<String,ArrayList<String>>();
+        path=new HashMap<String,String>();
     }
 
     public void perform(String inputWord) throws Exception
     {
-
+        //ClassLoader classLoader=new Graph().getClass().getClassLoader();
+        //File file=new File(classLoader.getResource("sowpods.txt").getFile());
         File file=new File("sowpods.txt");
         BufferedReader rdr=new BufferedReader(new FileReader(file));
         String line="";
@@ -34,7 +36,6 @@ class Graph
                 }
             }
         }
-        System.out.println(adjList.get(inputWord));
         rdr.close();
     }
 
@@ -50,37 +51,47 @@ class Graph
             return true;
         return false;
     }
-    
-    public String BFS(String startWord, String endWord)
+
+    public boolean BFS(String startWord, String endWord)
     {
-    	String currentWord = startWord;
+        String currentWord = startWord;
         Set<String> visited = new HashSet<String>();
         LinkedList<String> queue = new LinkedList<String>();
         visited.add(currentWord);
-        HashMap<String, Integer> distance = new HashMap<String, Integer>();
+        //HashMap<String, Integer> distance = new HashMap<String, Integer>();
         queue.add(currentWord);
-        distance.put(currentWord, 0);
+        //distance.put(currentWord, 0);
 
         while (queue.size() != 0)
         {
-            // Dequeue a vertex from queue and print it
-        	currentWord = queue.poll();
+            currentWord = queue.poll();
             ArrayList<String> adjacentWords = adjList.get(currentWord);
-            for (String s : adjacentWords) {
-            	if (!visited.contains(s))
+            for (String s : adjacentWords) 
+            {
+                if (!visited.contains(s))
                 {
                     visited.add(currentWord);
                     queue.add(s);
-                    distance.put(s, distance.get(currentWord)+1) ;
+                    path.put(s,currentWord);
+                    //distance.put(s, distance.get(currentWord)+1) ;
                 }
-            	if(s.equals(endWord)){
-            		return endWord;
-            	}
+                if(s.equals(endWord))
+                {
+                    return true;
+                }
             }
-            
         }
-        return "HI";
+        return false;
     }
-    
-    
+
+    public void printPath(String startWord,String endWord)
+    {
+        String currentWord=endWord;
+        while(!currentWord.equals(startWord))
+        {
+            System.out.println(currentWord);
+            currentWord=path.get(currentWord);
+        }
+        System.out.println(currentWord);
+    }
 }
