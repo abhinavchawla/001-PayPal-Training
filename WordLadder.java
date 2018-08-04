@@ -9,5 +9,10 @@ public class WordLadder
         String dest=s.nextLine();
         Graph g=new Graph();
         g.perform(inputWord);
+        System.out.println(g.path);
+        if(g.BFS(inputWord,dest))
+        	g.printPath(inputWord,dest);
+        else
+        	System.out.println("No path found..!");
 	}
 }
